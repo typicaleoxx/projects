@@ -1,6 +1,6 @@
 import login
 import json
-balance=0
+balance=0.0
 def main():
     print(f"Hi, {login.login_username.capitalize()} welcome to your account. ")
     print(f"What operation do you want to perform ? \n 1. Deposit money \n 2. Withdraw money \n 3. Check balance ")
@@ -17,27 +17,34 @@ def main():
         try_again=input()
         if try_again=="y":
             main()
+        else:
+            print("Have a great day")
 def deposit():
+    global balance
     try:
-        deposit=float(input("How much do you want to deposit? "))
-        file=open("transaction_details.json","a")
-        balance=balance+deposit
-        user_balance={"username":login.login_username, "balance":balance, "deposit":deposit}
-        file=open("transactions.json","a")
+        deposit_amt=float(input("How much do you want to deposit? "))
+        file=open("transactions_details.json","a")
+        balance+=deposit_amt
+        user_balance={"username":login.login_username, "balance":balance, "deposit":deposit_amt}
+        file=open("transactions_details.json","a")
         json_userbalance=json.dumps(user_balance)
         file.write(json_userbalance+"-")
         file.close()
+        print(f"Successfully deposited Rs {deposit_amt} in your account")
         view=input("Do you want to view your current balance? (y/n)")
         if view=="y":
-            view_balance(login.login_username)
+            view_balance()
     except:
         pass
 
 def withdraw():
+    global balance
     withdraw_amt=float(input("How much do you want to withdraw ? "))
-    file=open("transactions.json","a")
-    try:
-        balance=balance-withdraw_amt
+    file=open("transactions_details.json","a")
+    if True:
+        if withdraw_amt>balance:
+            raise ValueError("Insufficient balance. ")
+        balance-=withdraw_amt
         user_balance={"username":login.login_username,"balance":balance}
         json_userbalance=json.dumps(user_balance)
         file.write(json_userbalance+"-")
@@ -46,10 +53,10 @@ def withdraw():
         view=input("Do you want to view your balance?(y/n) ")
         if view=="y":
             view_balance()
-    except:
-        print("Error occured.Amt cannot be withdrawn")
+
 def view_balance():
-    file=open("transactions.json","r")
+    global balance
+    file=open("transactions_details.json","r")
     json_view_balance=file.read()
     file.close()
     list_view_balance=json_view_balance.split("-")
