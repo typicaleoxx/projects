@@ -25,7 +25,7 @@ def deposit():
         deposit_amt=float(input("How much do you want to deposit? "))
         file=open("transactions_details.json","a")
         balance+=deposit_amt
-        user_balance={"username":login.login_username, "balance":balance, "deposit":deposit_amt}
+        user_balance={"username":login.login_username, "deposit":deposit_amt, "balance":balance}
         file=open("transactions_details.json","a")
         json_userbalance=json.dumps(user_balance)
         file.write(json_userbalance+"-")
@@ -45,7 +45,7 @@ def withdraw():
         if withdraw_amt>balance:
             raise ValueError("Insufficient balance. ")
         balance-=withdraw_amt
-        user_balance={"username":login.login_username,"balance":balance}
+        user_balance={"username":login.login_username,"withdrawn":withdraw_amt, "balance":balance}
         json_userbalance=json.dumps(user_balance)
         file.write(json_userbalance+"-")
         file.close()
