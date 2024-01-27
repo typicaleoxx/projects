@@ -5,15 +5,18 @@ def login():
     login_username=input("Please enter your username: ").strip().lower()
     login_password=input("Please enter your password: ").strip().lower()
     file=open("user_details.json","r")
-    for details in file:
-        userdetails=json.loads(details)
-        if userdetails.get("username")==login_username:
-            if userdetails.get("password")==login_password:
-                print("Login successful.")
-                trans.main()
-            else:
-                print("Incorrect password. Try again!")
-                
+    json_userdetails=file.read()
+    file.close()
+    list_userdetails=json_userdetails.split("-")
+    for details in list_userdetails:
+        if details!="":
+            dict_userdetails=json.loads(details)
+            if dict_userdetails.get("username")==login_username:
+                if dict_userdetails.get("password")==login_password:
+                    print("Login successful.")
+                    trans.main()
+                else:
+                    print("Incorrect password. Try again!")
         else:
             again=input("Incorrect username. Do you want to try again? (y/n)").strip().lower()
             if again=="y":

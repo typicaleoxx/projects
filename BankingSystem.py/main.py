@@ -1,7 +1,7 @@
 import register
 import login
 def main():
-        print("Hi, welcome to magic accounting.")
+        print("Namaste, welcome to THE SNEHA BANK.")
         user=input("Are you an existing user? (y/n) ").strip().lower()
         try:
             if user=="y":
