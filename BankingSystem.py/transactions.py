@@ -2,7 +2,7 @@ import login
 import json
 balance=0.0
 def main():
-    print(f"Hi, {login.login_username.capitalize()} welcome to your account. ")
+    print(f"Hi, {login.login_username.capitalize()} welcome to your account. \n")
     print(f"What operation do you want to perform ? \n 1. Deposit money \n 2. Withdraw money \n 3. Check balance ")
     operation=input("Choose operation number: ").strip()
     try:

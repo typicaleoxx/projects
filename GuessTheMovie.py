@@ -41,14 +41,14 @@ def game():
         print(f"{game_guess}")
         user_guess=input(f"Guess the movie : ").lower().strip()
         if movie_dialogues.get(game_guess)==user_guess:
-            print("Congratulations. You guessed it right.")
+            print("Congratulations. You guessed it right.\n")
             score+=1
         else:
-            print(f"Oops, wrong guess. It's {movie_dialogues.get(game_guess)}.")
+            print(f"Oops, wrong guess. It's {movie_dialogues.get(game_guess)}.\n")
     total_score(score)
 
 def total_score(score):
-    print(f"Congratulations! You scored {score} out of 5")
+    print(f"Congratulations! 🎉🎉🎉 You scored {score} out of 5🏆🏅")
     ask=input("Do you want to play again? (yes/no)").lower()
     try:
         if ask=="yes" or ask=="no":

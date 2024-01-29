@@ -13,10 +13,10 @@ def login():
             dict_userdetails=json.loads(details)
             if dict_userdetails.get("username")==login_username:
                 if dict_userdetails.get("password")==login_password:
-                    print("Login successful.")
+                    print("Login successful.\n")
                     trans.main()
                 else:
-                    print("Incorrect password. Try again!")
+                    print("Incorrect password. Try again!\n")
         else:
             again=input("Incorrect username. Do you want to try again? (y/n)").strip().lower()
             if again=="y":
