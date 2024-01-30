@@ -1,4 +1,4 @@
-#generates more characters that asked
+#generates more characters than asked
 import random
 import string
 
