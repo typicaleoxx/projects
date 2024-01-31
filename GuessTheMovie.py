@@ -22,6 +22,8 @@ movie_dialogues={
 
 
 def main():
+    global user_name 
+    user_name=input("Please enter your name: ").capitalize()
     user_ready=input("Are you ready for a fun round? (yes/no)").lower()
     try:
         if user_ready=="yes" or user_ready=="no":
@@ -48,7 +50,7 @@ def game():
     total_score(score)
 
 def total_score(score):
-    print(f"Congratulations! 🎉🎉🎉 You scored {score} out of 5🏆🏅")
+    print(f"Congratulations! {user_name} 🎉🎉🎉 You scored {score} out of 5🏆🏅")
     ask=input("Do you want to play again? (yes/no)").lower()
     try:
         if ask=="yes" or ask=="no":
