@@ -54,6 +54,7 @@ def total_score(score):
     ask=input("Do you want to play again? (yes/no)").lower()
     try:
         if ask=="yes" or ask=="no":
+            print("hi")
             if ask=="yes":
                 game()
             elif ask=="no":
