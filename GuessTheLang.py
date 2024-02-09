@@ -56,3 +56,4 @@ def total_score(score):
         
 main()
         
+
