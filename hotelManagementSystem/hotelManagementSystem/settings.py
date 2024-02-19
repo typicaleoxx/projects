@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "accounting",
     "management",
     "restaurant",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
