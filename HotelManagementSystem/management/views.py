@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import RoomType
-from .serializers import RoomTypeSerializer
+from .models import RoomType, Room
+from .serializers import RoomTypeSerializer, RoomSerializer
 
 # Create your views here.
 # everymodel ko CRUD operation  garna
@@ -22,3 +22,8 @@ class RoomTypeView(ModelViewSet):
     # serializer_class=#component where object lai json and json lai object ma convert garna milcha
     queryset = RoomType.objects.all()
     serializer_class = RoomTypeSerializer
+
+
+class RoomView(ModelViewSet):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer

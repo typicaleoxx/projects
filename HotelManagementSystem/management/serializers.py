@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import RoomType
+from .models import RoomType, Room
 
 
 # everymodel ko lagi everysingle serializer class huncha
@@ -12,3 +12,8 @@ class RoomTypeSerializer(serializers.ModelSerializer):
         model = RoomType  # kun model ko object lai json ma convert garcha bhanera model atrribute ma define garne
         fields = "__all__"  # field attribute ma chai kun kunfield lai convert garne bhanera lekhne
         # sabai object lai serialize garna __all__ bhanera define gareko
+
+
+class RoomSerializer(serializers.ModelSerializer):
+    model = Room
+    fields = "__all__"
