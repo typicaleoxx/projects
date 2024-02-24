@@ -16,7 +16,7 @@ class Menu(models.Model):
 class Food(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    menu = models.ForeignKey(Menu, on_delete=models.SET_NULLS, null=True)
+    menu = models.ForeignKey(Menu, on_delete=models.SET_NULL, null=True)
     # menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     # cascade rakhda if menu class ma its deleted then menu field ma ni it gets deleted
     # but if set null rakhda, euta ma del bhayepachi aru ma null bhanera bascha

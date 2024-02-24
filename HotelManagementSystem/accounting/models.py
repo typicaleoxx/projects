@@ -1,5 +1,5 @@
 from django.db import models
-from frontdesk import Customer
+from frontdesk.models import Customer
 
 
 # Create your models here.
@@ -8,7 +8,7 @@ class Bill(models.Model):
     total_amount = models.IntegerField()
 
 
-class Payment(models.model):
+class Payment(models.Model):
     bill = models.OneToOneField(Bill, on_delete=models.SET_NULL, null=True)
 
 

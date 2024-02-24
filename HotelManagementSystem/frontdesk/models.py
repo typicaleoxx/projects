@@ -1,5 +1,5 @@
 from django.db import models
-from management import Room
+from management.models import Room
 
 
 # Create your models here.

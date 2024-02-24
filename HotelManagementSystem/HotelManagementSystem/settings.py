@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-*d_ot9ei$f-k=6zyij0soy4#2+h4r=_s2154lvjr(_a+f89p=l
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# auth_user_model bhanne variable ma chai django ko user table ko satta kun use garna lako ho tei define garne
+# firstma appcallgarne.name
+AUTH_USER_MODEL = "management.User"
+# hamle define gareko usertable chai use huncha
 
 # Application definition
 
@@ -37,9 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "management",
     "accounting",
     "frontdesk",
+    "management",
     "restaurant",
 ]
 
