@@ -26,7 +26,7 @@ class User(AbstractUser):
     # because username bhanda it feels more secure to use email field
     USERNAME_FIELD = "email"  # password pachi magne bhanera email field define gareko
     # after this username field seems like neglected so required field bhanera define gareko
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = ["username"]#superuser create garda username field magcha nai so error dincha if not inserted, thats why required
 
 
 # Create your models here.
