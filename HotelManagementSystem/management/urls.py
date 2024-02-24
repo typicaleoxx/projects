@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RoomTypeView
+from .views import RoomTypeView, RoomView
 
 urlpatterns = [
     path(
@@ -15,6 +15,9 @@ urlpatterns = [
     path(
         "room-type/<int:pk>/",
         RoomTypeView.as_view({"get": "retrieve", "put": "update", "delete": "destroy"}),
+    ),
+    path(
+        "room/", RoomView.as_view({"get": "list", "post": "create"})
     ),  # class based views use garda as_view() method call garnu parcha
 ]  # in crud create garna post request
 # retrieve garna get,update-put. delete-delete
