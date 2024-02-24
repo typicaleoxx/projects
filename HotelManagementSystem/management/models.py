@@ -1,6 +1,33 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+# django ko user table modify garera use garna lako
+# for that we're using abstract user
+
+
+# this is custom user table
+class User(AbstractUser):
+    email = models.EmailField(
+        unique=True
+    )  # using unique argument to avoid conflicts later if any user uses same email
+    password = models.CharField(max_length=200)
+    # password field stays encrypted, and after encription it has longer value
+    # thats why we're using max length 200
+    username = models.CharField(max_length=200, null=True)
+    # we're overwriting django user table to user USERNAME_FIELD
+    # DJANGO ask for username and password field for user indentification
+    # when any variable is in all upper
+    # it is called CONSTANT VARIABLE
+    # value is not constant but only name is
+    # if we use django default user table it does
+    # USERNAME_FIELD="username"(username field chai password pachi ko arko field ho)
+    # so we change it with email
+    # (email field chai password pachi ko arko field)#this is the modification we did by creating our own user table
+    # because username bhanda it feels more secure to use email field
+    USERNAME_FIELD = "email"  # password pachi magne bhanera email field define gareko
+    # after this username field seems like neglected so required field bhanera define gareko
+    REQUIRED_FIELDS = ["username"]
+
 
 # Create your models here.
 class RoomType(models.Model):
@@ -9,7 +36,7 @@ class RoomType(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=200)
-
+    description = models.TextField()
     # type field is a relationship field
     # since type field has OTM relation, Foreignkey class is being used
     # foreignkey defines relationship between table RoomType and Room in the Type field
