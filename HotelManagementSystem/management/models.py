@@ -9,7 +9,7 @@ class RoomType(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
+
     # type field is a relationship field
     # since type field has OTM relation, Foreignkey class is being used
     # foreignkey defines relationship between table RoomType and Room in the Type field
