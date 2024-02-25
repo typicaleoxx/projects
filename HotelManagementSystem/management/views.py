@@ -38,17 +38,17 @@ class RoomEditView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
-    # def get(self, request, pk):
-    #     try:
-    #         room_obj = Room.objects.get(id=pk)
-    #     except:
-    #         return Response("Data not found!")
-    #     serializer = RoomSerializer(room_obj, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     else:
-    #         return Response
+    def get(self, request, pk):
+        try:
+            room_obj = Room.objects.get(id=pk)
+        except:
+            return Response("Data not found!")
+        serializer = RoomSerializer(room_obj, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response
 
     def delete(Self, request, pk):
         try:
