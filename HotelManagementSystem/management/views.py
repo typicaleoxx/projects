@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import RoomType, Room
-from .serializers import RoomTypeSerializer, RoomSerializer
+from rest_framework.generics import GenericAPIView
+from .models import RoomType, Room, User
+from .serializers import RoomTypeSerializer, RoomSerializer, UserSerializer
+from rest_framework.response import Response
 
 # Create your views here.
 # everymodel ko CRUD operation  garna
@@ -27,3 +29,43 @@ class RoomTypeView(ModelViewSet):
 class RoomView(ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
+
+class RoomEditView(GenericAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+    def get(self, request, pk):
+        try:
+            room_obj = Room.objects.get(id=pk)
+        except:
+            return Response("Data not found!")
+        serializer = RoomSerializer(room_obj, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response
+
+    def delete(Self, request, pk):
+        try:
+            room_obj = Room.objects.all(id=pk)
+        except:
+            return Response("Data not found")
+        room_obj.delete()
+        return Response("Data deleted")
+
+
+class UserView(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def register(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("User Created !")
+        else:
+            return Response(serializer.errors)
+    def login(self,request):
+        pass
