@@ -35,6 +35,14 @@ class RoomView(GenericAPIView):
         serializer = RoomSerializer(room_objs, many=True)
         return Response(serializer.data)
 
+    def post(self, request):
+        serializer = RoomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
 
 # sabai data list garna ni we do get request ani specific data ko lagi ni get
 # tesaile duita get banayera hunna, overwrite huncha
@@ -49,27 +57,25 @@ class RoomEditView(GenericAPIView):
             room_obj = Room.objects.get(id=pk)
         except:
             return Response("Data not found!")
+        serializer = RoomSerializer(room_obj)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        room_obj = Room.objects.get(id=pk)
         serializer = RoomSerializer(room_obj, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response
-
-    def post(self,request):
-        serializer=RoomSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
             return Response(serializer.errors)
-    def delete(Self, request, pk):
+
+    def delete(self, request, pk):
         try:
-            room_obj = Room.objects.all(id=pk)
+            room_obj = Room.objects.get(id=pk)
         except:
             return Response("Data not found")
         room_obj.delete()
-        return Response("Data deleted")
+        return Response("Data has been successfully deleted")
 
 
 class UserView(ModelViewSet):
