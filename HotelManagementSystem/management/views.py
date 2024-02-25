@@ -5,6 +5,7 @@ from .models import RoomType, Room, User
 from .serializers import RoomTypeSerializer, RoomSerializer, UserSerializer
 from rest_framework.response import Response
 
+# TODO make logic for login
 # Create your views here.
 # everymodel ko CRUD operation  garna
 # views ma define garne
