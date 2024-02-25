@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import RoomTypeView, RoomView, UserView
+from .views import RoomTypeView, RoomView, UserView, RoomEditView
+
 urlpatterns = [
     path(
         "room-type/",
@@ -15,10 +16,9 @@ urlpatterns = [
         "room-type/<int:pk>/",
         RoomTypeView.as_view({"get": "retrieve", "put": "update", "delete": "destroy"}),
     ),
-    path(
-        "room/", RoomView.as_view({"get": "list", "post": "create"})
-    ), 
-     # class based views use garda as_view() method call garnu parcha
-     path("register/",UserView.as_view({"post":"register"}),name="register")
+    path("room/", RoomView.as_view({"get": "list", "post": "create"})),
+    # class based views use garda as_view() method call garnu parcha
+    path("room/<int:pk>/", RoomEditView.as_view()),
+    path("register/", UserView.as_view({"post": "register"}), name="register"),
 ]  # in crud create: garna post request
 # retrieve garna get,update-put. delete-delete

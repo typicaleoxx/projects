@@ -30,10 +30,16 @@ class RoomView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
-#sabai data list garna ni we do get request ani specific data ko lagi ni get
-    #tesaile duita get banayera hunna, overwrite huncha
-    #thats why generic API view ma kaam garda
-    #we make different view for edit view and delete
+    def get(self, request):
+        room_objs = Room.objects.all()
+        serializer = RoomSerializer(room_objs, many=True)
+        return Response(serializer.data)
+
+
+# sabai data list garna ni we do get request ani specific data ko lagi ni get
+# tesaile duita get banayera hunna, overwrite huncha
+# thats why generic API view ma kaam garda
+# we make different view for edit view and delete
 class RoomEditView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -50,6 +56,13 @@ class RoomEditView(GenericAPIView):
         else:
             return Response
 
+    def post(self,request):
+        serializer=RoomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
     def delete(Self, request, pk):
         try:
             room_obj = Room.objects.all(id=pk)
@@ -70,5 +83,6 @@ class UserView(ModelViewSet):
             return Response("User Created !")
         else:
             return Response(serializer.errors)
-    def login(self,request):
+
+    def login(self, request):
         pass
