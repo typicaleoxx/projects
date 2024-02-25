@@ -26,26 +26,29 @@ class RoomTypeView(ModelViewSet):
     serializer_class = RoomTypeSerializer
 
 
-class RoomView(ModelViewSet):
+class RoomView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
-
+#sabai data list garna ni we do get request ani specific data ko lagi ni get
+    #tesaile duita get banayera hunna, overwrite huncha
+    #thats why generic API view ma kaam garda
+    #we make different view for edit view and delete
 class RoomEditView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
-    def get(self, request, pk):
-        try:
-            room_obj = Room.objects.get(id=pk)
-        except:
-            return Response("Data not found!")
-        serializer = RoomSerializer(room_obj, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response
+    # def get(self, request, pk):
+    #     try:
+    #         room_obj = Room.objects.get(id=pk)
+    #     except:
+    #         return Response("Data not found!")
+    #     serializer = RoomSerializer(room_obj, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     else:
+    #         return Response
 
     def delete(Self, request, pk):
         try:
