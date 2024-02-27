@@ -4,7 +4,8 @@ from rest_framework.generics import GenericAPIView
 from .models import RoomType, Room, User
 from .serializers import RoomTypeSerializer, RoomSerializer, UserSerializer
 from rest_framework.response import Response
-
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 # TODO make logic for login
 # Create your views here.
 # everymodel ko CRUD operation  garna
@@ -92,4 +93,13 @@ class UserView(ModelViewSet):
             return Response(serializer.errors)
 
     def login(self, request):
-        pass
+        email=request.data.get("email")
+        password=request.data.get("password")
+        user=authenticate(username=email,password=password)
+
+        if user==None:
+            return Response("Invalid credentials !")
+        else:
+            token,_=Token.objects.get_or_create(user=user)
+            return Response(token)
+
