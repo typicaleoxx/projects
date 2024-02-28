@@ -46,7 +46,8 @@ class RoomView(GenericAPIView):
             return Response(serializer.errors)
 
 
-# sabai data list garna ni we do get request ani specific data ko lagi ni get fdfgdfd
+# sabai data list garna ni we do get request ani specific data ko lagi ni get fdfgdfdggg
+
 # tesaile duita get banayera hunna, overwrite huncha
 # thats why generic API view ma kaam garda
 # we make different view for edit view and delete
