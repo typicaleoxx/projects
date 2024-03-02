@@ -20,5 +20,6 @@ urlpatterns = [
     # class based views use garda as_view() method call garnu parcha
     path("room/<int:pk>/", RoomEditView.as_view()),
     path("register/", UserView.as_view({"post": "register"}), name="register"),
+    path("login/", UserView.as_view({"post": "login"}), name="login"),
 ]  # in crud create: garna post request
 # retrieve garna get,update-put. delete-delete

@@ -6,6 +6,8 @@ from .serializers import RoomTypeSerializer, RoomSerializer, UserSerializer
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.hashers import make_password
+
 # TODO make logic for login
 # Create your views here.
 # everymodel ko CRUD operation  garna
@@ -46,7 +48,8 @@ class RoomView(GenericAPIView):
             return Response(serializer.errors)
 
 
-# sabai data list garna ni we do get request ani specific data ko lagi ni get 
+# sabai data list garna ni we do get request ani specific data ko lagi ni get
+
 
 # tesaile duita get banayera hunna, overwrite huncha
 # thats why generic API view ma kaam garda
@@ -88,19 +91,22 @@ class UserView(ModelViewSet):
     def register(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            password = request.data.get("password")
+            hash_password = make_password("password")
+            a=serializer.save()
+            a.password=hash_password
+            a.save()
             return Response("User Created !")
         else:
             return Response(serializer.errors)
 
     def login(self, request):
-        email=request.data.get("email")
-        password=request.data.get("password")
-        user=authenticate(username=email,password=password)
+        email = request.data.get("email")
+        password = request.data.get("password")
+        user = authenticate(username=email, password=password)
 
-        if user==None:
+        if user == None:
             return Response("Invalid credentials !")
         else:
-            token,_=Token.objects.get_or_create(user=user)
-            return Response(token)
-
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response(token.key)
