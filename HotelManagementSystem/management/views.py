@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import make_password
+from rest_framework.permissions import AllowAny
 
 # TODO make logic for login
 # Create your views here.
@@ -87,14 +88,15 @@ class RoomEditView(GenericAPIView):
 class UserView(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
     def register(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             password = request.data.get("password")
             hash_password = make_password("password")
-            a=serializer.save()
-            a.password=hash_password
+            a = serializer.save()
+            a.password = hash_password
             a.save()
             return Response("User Created !")
         else:
