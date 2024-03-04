@@ -43,7 +43,6 @@ class RoomTypeView(ModelViewSet):
     queryset = RoomType.objects.all()
     serializer_class = RoomTypeSerializer
 
-
 class RoomView(GenericAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
