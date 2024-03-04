@@ -2,12 +2,25 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import GenericAPIView
 from .models import RoomType, Room, User
-from .serializers import RoomTypeSerializer, RoomSerializer, UserSerializer
+from .serializers import (
+    RoomTypeSerializer,
+    RoomSerializer,
+    UserSerializer,
+    GroupSerializer,
+)
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import make_password
 from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import Group
+
+
+class GroupView(ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [AllowAny]
+
 
 # TODO make logic for login
 # Create your views here.

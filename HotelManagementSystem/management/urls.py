@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RoomTypeView, RoomView, UserView, RoomEditView
+from .views import RoomTypeView, RoomView, UserView, RoomEditView, GroupView
 
 urlpatterns = [
     path(
@@ -21,5 +21,6 @@ urlpatterns = [
     path("room/<int:pk>/", RoomEditView.as_view()),
     path("register/", UserView.as_view({"post": "register"}), name="register"),
     path("login/", UserView.as_view({"post": "login"}), name="login"),
+    path("role/", GroupView.as_view({"get": "list"}), name="role-listing"),
 ]  # in crud create: garna post request
 # retrieve garna get,update-put. delete-delete

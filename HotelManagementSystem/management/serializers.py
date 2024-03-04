@@ -1,5 +1,12 @@
 from rest_framework import serializers
 from .models import RoomType, Room, User
+from django.contrib.auth.models import Group
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id", "name"]
 
 
 # everymodel ko lagi everysingle serializer class huncha
@@ -42,4 +49,4 @@ class RoomSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "password"]
+        fields = ["email", "password","groups"]
